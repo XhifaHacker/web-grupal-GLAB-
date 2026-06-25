@@ -1,6 +1,6 @@
 /* ============================================================= */
-/*  GOJO-SCRIPT.JS — Fusión Semana 10 + Semana 11               */
-/*  Satoru Gojo Portfolio · JavaScript I & II                    */
+/*  GOJO-SCRIPT.JS — Fusión Semana 10 + Semana 11 + Semana 12   */
+/*  Satoru Gojo Portfolio · JavaScript I, II & III               */
 /*  Todos los requerimientos integrados                          */
 /* ============================================================= */
 
@@ -929,3 +929,448 @@ document.addEventListener('DOMContentLoaded', () => {
    FIN DEL SCRIPT FUSIONADO
 ───────────────────────────────────────────────────────────── */
 console.log("✅ gojo-script-fusionado.js: S10 R1–R10 + S11 R1–R10 cargados sin conflictos.");
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ██████████████  SEMANA 12 — JAVASCRIPT III  ██████████████
+   Arreglos · Objetos · Manipulación del DOM
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   S12 · EJ 1 · SISTEMA DE GESTIÓN DE TÉCNICAS (ARREGLOS + OBJETOS)
+   Ejercicio 1 del Lab 12 adaptado al universo Gojo.
+   Arreglo de 3 proyectos con nombre, tecnología y estado.
+   Funciones: agregarProyecto() y filtrarPorEstado().
+───────────────────────────────────────────────────────────── */
+
+// 1. ARREGLO DE PROYECTOS (temática Gojo)
+const proyectos = [
+  { id: 1, nombre: "Portafolio Gojo",    tecnologia: "HTML/CSS",    estado: "completado"  },
+  { id: 2, nombre: "Dominio Infinito",   tecnologia: "JavaScript",  estado: "en-progreso" },
+  { id: 3, nombre: "Técnica Maldita UI", tecnologia: "React",       estado: "pendiente"   }
+];
+
+// 2. FUNCIÓN PARA AGREGAR PROYECTO
+function agregarProyecto(nombre, tecnologia, estado) {
+  const nuevo = {
+    id: proyectos.length + 1,
+    nombre,
+    tecnologia,
+    estado
+  };
+  proyectos.push(nuevo);
+  return nuevo;
+}
+
+// 3. FUNCIÓN PARA FILTRAR POR ESTADO
+function filtrarPorEstado(estado) {
+  return proyectos.filter(p => p.estado === estado);
+}
+
+// 4. PRUEBAS EN CONSOLA (Ejercicio 1)
+console.log("📁 TODOS LOS PROYECTOS:");
+console.table(proyectos);
+
+console.log("\n✅ PROYECTOS COMPLETADOS:");
+console.table(filtrarPorEstado("completado"));
+
+console.log("\n➕ AGREGANDO NUEVO PROYECTO:");
+console.log(agregarProyecto("Six Eyes Dashboard", "TypeScript", "en-progreso"));
+console.table(proyectos);
+
+
+/* ─────────────────────────────────────────────────────────────
+   S12 · EJ 2 · LISTA DE MISIONES (DOM BÁSICO)
+   Ejercicio 2 del Lab 12 adaptado: lista de tareas/misiones.
+   Agregar misiones · toggle completado · contador de pendientes.
+   Se monta sobre el contenedor #gojo-misiones si existe en el HTML,
+   si no, se inyecta automáticamente al final del <main> o <body>.
+───────────────────────────────────────────────────────────── */
+
+// --- ESTILOS DE LA SECCIÓN DE MISIONES ---
+const misionesCSS = `
+  #seccion-misiones {
+    background: rgba(20, 8, 30, 0.88);
+    border: 2px solid #a855f7;
+    border-radius: 16px;
+    padding: 28px;
+    margin: 32px auto;
+    max-width: 640px;
+  }
+  #seccion-misiones h2 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #a855f7;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    color: #e9d5ff;
+  }
+  .mision-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .mision-input-group input {
+    flex: 1;
+    padding: 9px 14px;
+    background: rgba(40, 10, 50, 0.9);
+    border: 2px solid #7c3aed;
+    border-radius: 8px;
+    color: #e9d5ff;
+    font-size: 0.95rem;
+    outline: none;
+  }
+  .mision-input-group input::placeholder { color: #9980b0; }
+  .mision-input-group input:focus { border-color: #c084fc; }
+  .mision-input-group button {
+    padding: 9px 18px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+  }
+  .mision-input-group button:hover { opacity: 0.85; }
+  .mision-contador {
+    background: rgba(124, 58, 237, 0.18);
+    border: 1px solid #7c3aed;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    color: #c4b5fd;
+  }
+  .mision-contador span { font-weight: bold; color: #f0abfc; }
+  .mision-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(60, 20, 80, 0.55);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border-left: 4px solid #7c3aed;
+    transition: opacity 0.2s;
+  }
+  .mision-item.completada {
+    border-left-color: #22c55e;
+    opacity: 0.65;
+  }
+  .mision-item.completada .mision-texto {
+    text-decoration: line-through;
+    color: #86efac;
+  }
+  .mision-texto {
+    flex: 1;
+    margin: 0 10px;
+    color: #e9d5ff;
+    font-size: 0.92rem;
+  }
+  .btn-mision-completar {
+    background: #16a34a;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    font-size: 0.85rem;
+  }
+  .btn-mision-completar:hover { background: #15803d; }
+  .btn-mision-eliminar {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .btn-mision-eliminar:hover { background: #b91c1c; }
+`;
+
+const styleMisiones = document.createElement("style");
+styleMisiones.id = "misiones-styles";
+styleMisiones.textContent = misionesCSS;
+document.head.appendChild(styleMisiones);
+
+// --- DATOS INICIALES ---
+let misiones = [
+  { id: 1, texto: "Entrenar a Yuji Itadori",         completada: false },
+  { id: 2, texto: "Eliminar maldición grado especial", completada: true  }
+];
+let siguienteMisionId = 3;
+
+// --- INYECTAR CONTENEDOR SI NO EXISTE ---
+function obtenerContenedorMisiones() {
+  let sec = document.getElementById("gojo-misiones");
+  if (!sec) {
+    sec = document.createElement("section");
+    sec.id = "gojo-misiones";
+    sec.className = "seccion";
+    const main = document.querySelector("main") || document.body;
+    main.appendChild(sec);
+  }
+  return sec;
+}
+
+// --- RENDERIZAR MISIONES ---
+function renderizarMisiones() {
+  const sec = obtenerContenedorMisiones();
+
+  // Construir estructura si aún no existe
+  if (!document.getElementById("seccion-misiones")) {
+    sec.innerHTML = `
+      <div id="seccion-misiones">
+        <h2>⚡ Misiones Jujutsu</h2>
+        <div class="mision-input-group">
+          <input type="text" id="input-mision" placeholder="Nueva misión...">
+          <button id="btn-agregar-mision">Agregar</button>
+        </div>
+        <div class="mision-contador">
+          🔴 Misiones pendientes: <span id="contador-misiones">0</span>
+        </div>
+        <div id="lista-misiones"></div>
+      </div>`;
+
+    // Eventos (solo se registran la primera vez)
+    const btnAgregar = document.getElementById("btn-agregar-mision");
+    const inputMision = document.getElementById("input-mision");
+    if (btnAgregar) btnAgregar.addEventListener("click", agregarMision);
+    if (inputMision) inputMision.addEventListener("keypress", e => {
+      if (e.key === "Enter") agregarMision();
+    });
+  }
+
+  const lista     = document.getElementById("lista-misiones");
+  const contador  = document.getElementById("contador-misiones");
+  if (!lista || !contador) return;
+
+  lista.innerHTML = "";
+  let pendientes  = 0;
+
+  misiones.forEach(m => {
+    if (!m.completada) pendientes++;
+
+    const div = document.createElement("div");
+    div.className = `mision-item${m.completada ? " completada" : ""}`;
+    div.innerHTML = `
+      <span class="mision-texto">${m.texto}</span>
+      <div>
+        <button class="btn-mision-completar" onclick="toggleMision(${m.id})">
+          ${m.completada ? "↩️" : "✅"}
+        </button>
+        <button class="btn-mision-eliminar" onclick="eliminarMision(${m.id})">🗑️</button>
+      </div>`;
+    lista.appendChild(div);
+  });
+
+  contador.textContent = pendientes;
+}
+
+function agregarMision() {
+  const input = document.getElementById("input-mision");
+  if (!input) return;
+  const texto = input.value.trim();
+  if (texto === "") { alert("⚠️ Escribe una misión antes de agregar."); return; }
+  misiones.push({ id: siguienteMisionId++, texto, completada: false });
+  input.value = "";
+  renderizarMisiones();
+  console.log(`✏️ Misión agregada: "${texto}"`);
+}
+
+function toggleMision(id) {
+  const m = misiones.find(m => m.id === id);
+  if (m) { m.completada = !m.completada; renderizarMisiones(); }
+}
+
+function eliminarMision(id) {
+  if (confirm("¿Eliminar esta misión?")) {
+    misiones = misiones.filter(m => m.id !== id);
+    renderizarMisiones();
+    console.log(`🗑️ Misión eliminada. Quedan: ${misiones.length}`);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   S12 · EJ 3 · ANÁLISIS DE CÓDIGO (DOM selectors)
+   Respuesta documentada: opciones a, c y d son válidas;
+   b falla porque getElementsByClassName devuelve una
+   HTMLCollection, no un elemento directo.
+───────────────────────────────────────────────────────────── */
+
+/*
+  ✅ EJERCICIO 3 — Respuesta:
+
+  El elemento tiene id="titulo", por lo que los selectores válidos son:
+
+  a) document.getElementById("titulo").innerHTML = "Asunto solucionado";
+     ✅ Válido — getElementById retorna el elemento directamente.
+
+  b) document.getElementsByClassName("titulo").innerText = "...";
+     ❌ Inválido — "titulo" es un id, no una clase. Además,
+        getElementsByClassName retorna una HTMLCollection (colección),
+        asignar .innerText a la colección no modifica nada.
+
+  c) document.querySelector("#titulo").textContent = "Asunto solucionado";
+     ✅ Válido — querySelector con "#titulo" selecciona por id correctamente.
+
+  d) document.getElementsByTagName("h1")[0].innerHTML = "Asunto solucionado";
+     ✅ Válido — Selecciona el primer <h1> del documento (que es el #titulo).
+
+  💡 RESPUESTAS CORRECTAS: a, c y d (las tres modifican el texto correctamente).
+     La más idiomática y directa es: a) getElementById  o  c) querySelector.
+*/
+
+
+/* ─────────────────────────────────────────────────────────────
+   S12 · EJ 4 · PROYECTO INTEGRADOR — SECCIÓN DE PROYECTOS + MISIONES
+   Renderiza los proyectos del EJ1 en el DOM con tarjetas visuales,
+   y monta la lista de misiones del EJ2.
+   Se integra al portfolio Gojo existente.
+───────────────────────────────────────────────────────────── */
+
+// Estilos para la sección de proyectos S12
+const proyectosCSS = `
+  #seccion-proyectos-s12 {
+    background: rgba(20, 8, 30, 0.88);
+    border: 2px solid #38bdf8;
+    border-radius: 16px;
+    padding: 28px;
+    margin: 32px auto;
+    max-width: 720px;
+  }
+  #seccion-proyectos-s12 h2 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    color: #e0f2fe;
+  }
+  .proyecto-card-s12 {
+    background: rgba(14, 30, 50, 0.7);
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-left: 5px solid #38bdf8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .proyecto-card-s12.completado  { border-left-color: #22c55e; }
+  .proyecto-card-s12.en-progreso { border-left-color: #f59e0b; }
+  .proyecto-card-s12.pendiente   { border-left-color: #6b7280; }
+  .proyecto-card-s12 .proy-nombre {
+    font-weight: bold;
+    color: #e0f2fe;
+    font-size: 0.97rem;
+  }
+  .proyecto-card-s12 .proy-tech {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.18);
+    border: 1px solid #38bdf8;
+    color: #7dd3fc;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+  }
+  .proyecto-card-s12 .proy-estado {
+    font-size: 0.82rem;
+    color: #94a3b8;
+  }
+  .btn-filtro-s12 {
+    margin-right: 8px;
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    border: 1px solid #38bdf8;
+    background: transparent;
+    color: #7dd3fc;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.83rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-filtro-s12:hover, .btn-filtro-s12.activo {
+    background: #38bdf8;
+    color: #0c1a2e;
+  }
+`;
+
+const styleProyectos = document.createElement("style");
+styleProyectos.id = "proyectos-s12-styles";
+styleProyectos.textContent = proyectosCSS;
+document.head.appendChild(styleProyectos);
+
+function renderizarProyectosS12(filtro = "todos") {
+  const container = document.getElementById("proyectos-list-s12");
+  if (!container) return;
+
+  const lista = filtro === "todos" ? proyectos : filtrarPorEstado(filtro);
+  const emojis = { completado: "✅", "en-progreso": "🔄", pendiente: "⏳" };
+
+  container.innerHTML = "";
+  lista.forEach(p => {
+    const div = document.createElement("div");
+    div.className = `proyecto-card-s12 ${p.estado}`;
+    div.innerHTML = `
+      <span class="proy-nombre">${p.nombre}</span>
+      <span class="proy-tech">${p.tecnologia}</span>
+      <span class="proy-estado">${emojis[p.estado] || "❓"} ${p.estado}</span>`;
+    container.appendChild(div);
+  });
+}
+
+// Inyectar sección integrada al cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ── Sección Proyectos S12 ──
+  const mainEl = document.querySelector("main") || document.body;
+
+  const secProyectos = document.createElement("section");
+  secProyectos.id = "gojo-proyectos-s12";
+  secProyectos.innerHTML = `
+    <div id="seccion-proyectos-s12">
+      <h2>📁 Proyectos – Semana 12</h2>
+      <div id="filtros-s12">
+        <button class="btn-filtro-s12 activo" data-filtro="todos">Todos</button>
+        <button class="btn-filtro-s12" data-filtro="completado">✅ Completados</button>
+        <button class="btn-filtro-s12" data-filtro="en-progreso">🔄 En progreso</button>
+        <button class="btn-filtro-s12" data-filtro="pendiente">⏳ Pendientes</button>
+      </div>
+      <div id="proyectos-list-s12"></div>
+    </div>`;
+  mainEl.appendChild(secProyectos);
+
+  // Render inicial de proyectos
+  renderizarProyectosS12("todos");
+
+  // Eventos de filtros
+  document.querySelectorAll(".btn-filtro-s12").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".btn-filtro-s12").forEach(b => b.classList.remove("activo"));
+      btn.classList.add("activo");
+      renderizarProyectosS12(btn.dataset.filtro);
+    });
+  });
+
+  // ── Sección Misiones S12 ──
+  renderizarMisiones();
+
+  console.log("✅ S12 Ej4: Proyecto integrador montado");
+  console.log(`📁 ${proyectos.length} proyectos | ⚡ ${misiones.length} misiones`);
+});
+
+
+/* ─────────────────────────────────────────────────────────────
+   FIN DEL SCRIPT FUSIONADO — S12 añadido
+───────────────────────────────────────────────────────────── */
+console.log("✅ gojo-script.js: S10 R1–R10 + S11 R1–R10 + S12 Ej1–Ej4 cargados sin conflictos.");
