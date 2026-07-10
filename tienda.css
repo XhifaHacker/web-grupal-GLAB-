@@ -1,0 +1,359 @@
+/* ============================================ */
+/* 1. ESTILOS GLOBALES - TEMÁTICA OSCURA JJK     */
+/* ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #120812; /* Fondo morado oscuro místico */
+    background-image: url('tumblr_6720afe4b23fff20fb0a55a8733db945_9c5fe706_1280.gif');
+    background-size: 300px auto;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    color: #ffffff;
+    padding-top: 90px; /* Evita que el navbar fixed tape el contenido */
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enlaces y textos tenues generales */
+.text-muted {
+    color: #b5a4b5 !important;
+}
+
+/* ============================================ */
+/* 2. NAVBAR (PERSONALIZACIÓN)                  */
+/* ============================================ */
+.navbar.bg-dark {
+    background: linear-gradient(135deg, #0a0510, #120812) !important;
+    border-bottom: 2px solid #5a2a5a;
+}
+
+.navbar-brand {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
+
+/* Botón de Modo Oscuro integrado en la interfaz */
+.btn-mode {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-mode:hover {
+    background: #ff00ff;
+    border-color: #ff00ff;
+    color: #120812;
+}
+
+/* ============================================ */
+/* 3. CONFIGURACIÓN DEL CARRUSEL (ESTILO JJK)   */
+/* ============================================ */
+/* Captura el contenedor del carrusel sin importar su ID o clase de sección */
+.carousel, .carousel-inner {
+    border: 2px solid #ffffff !important;
+    border-radius: 30px !important;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(18, 8, 18, 0.95), rgba(90, 42, 90, 0.6)) !important;
+}
+
+/* Fuerza el renderizado de los textos dentro de los slides */
+.carousel-item h1, 
+.carousel-item h2,
+.carousel-item h3,
+.carousel-item h4,
+.carousel-item h5 {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: bold !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #5a2a5a !important;
+}
+
+.carousel-item p {
+    font-family: 'Courier New', Courier, monospace !important;
+    color: antiquewhite !important;
+}
+
+/* Clases de utilidad heredadas de la estética visual */
+.highlight {
+    color: #ff00ff;
+    text-shadow: 0 0 15px #ff00ff;
+}
+
+.rango-badge {
+    background: linear-gradient(135deg, #5a2a5a, #9b4d9b);
+    padding: 5px 15px;
+    border-radius: 30px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* El carrusel va pegado al navbar (fixed-top), sin el padding-top del body */
+#miCarruselDestacado {
+    margin-top: -90px;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+.carousel-item {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Overlay oscuro sobre cada slide para que el texto siempre sea legible */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(10, 5, 16, 0.88), rgba(90, 42, 90, 0.45));
+    z-index: 1;
+}
+
+.carousel-item > .d-flex {
+    position: relative;
+    z-index: 2;
+}
+
+/* Fondos distintos por slide, dentro de la misma paleta morado/magenta */
+.carousel-slide-1 {
+    background: radial-gradient(circle at 30% 30%, #2c1332, #120812 70%);
+}
+
+.carousel-slide-2 {
+    background: radial-gradient(circle at 70% 40%, #3a1740, #0a0510 70%);
+}
+
+.carousel-slide-3 {
+    background: radial-gradient(circle at 50% 75%, #4a1f52, #111a22 70%);
+}
+
+/* Indicadores (los puntitos) con el acento neón */
+.carousel-indicators [data-bs-target] {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid #ffffff55;
+    opacity: 1 !important;
+}
+
+.carousel-indicators .active {
+    background-color: #ff00ff !important;
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+/* Flechas de navegación con el mismo brillo magenta */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: drop-shadow(0 0 6px #ff00ff);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 8%;
+}
+
+/* Botones secundarios del carrusel, ajustados a la paleta (mismo estilo que .btn-primary) */
+.carousel-item .btn-danger {
+    background: linear-gradient(135deg, #7a1a3a, #ff2266) !important;
+    border: none !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    border-radius: 30px !important;
+    transition: all 0.2s ease !important;
+}
+
+.carousel-item .btn-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 34, 102, 0.5);
+}
+
+.carousel-item .btn-warning {
+    background: linear-gradient(135deg, #7a5a1a, #ffcc00) !important;
+    color: #120812 !important;
+    border: none !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    border-radius: 30px !important;
+    transition: all 0.2s ease !important;
+}
+
+.carousel-item .btn-warning:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+}
+
+/* ============================================ */
+/* 4. CONFIGURACIÓN DEL CATÁLOGO (TARJETAS)     */
+/* ============================================ */
+/* Se acopla universalmente a las estructuras de tarjetas de tu diseño */
+.card {
+    transition: all 0.3s ease !important;
+    border: 2px solid #5a2a5a !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    background-color: rgba(30, 16, 30, 0.85) !important;
+}
+
+/* Animación de elevación y brillo neón morado */
+.card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 30px rgba(255, 0, 255, 0.2) !important;
+    border-color: #ff00ff !important;
+}
+
+/* Modifica los textos internos de tus productos */
+.card .card-title,
+.card h5,
+.card h4 {
+    font-family: 'Courier New', Courier, monospace !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+.card .card-text, 
+.card p {
+    font-family: 'Courier New', Courier, monospace !important;
+    color: #b5a4b5 !important;
+}
+
+/* Borde sutil inferior para las imágenes de los productos */
+.card img, .card-img-top {
+    border-bottom: 1px solid #5a2a5a !important;
+    object-fit: cover;
+}
+
+/* ============================================ */
+/* 5. MODALES Y FORMULARIOS (REGISTRO/LOGIN)    */
+/* ============================================ */
+/* Aplica los estilos interactivos a los campos del modal de registro */
+.contact-form input,
+.contact-form textarea {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none !important;
+    box-shadow: 0 0 12px rgba(255, 0, 255, 0.4) !important;
+    border-color: #ff00ff !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Estilos generales para el contenedor modal */
+.modal-content {
+    background-color: rgba(24, 12, 26, 0.97) !important;
+    border: 2px solid #5a2a5a !important;
+    border-radius: 20px !important;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 0 0 30px rgba(90, 42, 90, 0.5);
+}
+
+.modal-header,
+.modal-footer {
+    border-color: #5a2a5a !important;
+}
+
+.modal-title {
+    font-family: 'Courier New', Courier, monospace !important;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+}
+
+.modal-body p,
+.modal-body h4 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* ============================================ */
+/* 6. BOTONES                                   */
+/* ============================================ */
+.btn-primary {
+    background: linear-gradient(135deg, #5a2a5a, #ff00ff) !important;
+    border: none !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    border-radius: 30px !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    background: linear-gradient(135deg, #6a3a6a, #ff11ff) !important;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-outline-light {
+    border-radius: 30px !important;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.2s ease;
+}
+
+/* ============================================ */
+/* 7. WIDGET RELOJ DIGITAL Y FOOTER             */
+/* ============================================ */
+#reloj {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00d4ff;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+    letter-spacing: 3px;
+    display: inline-block;
+}
+
+footer.bg-dark {
+    background: linear-gradient(135deg, #0a0510, #120812) !important;
+    border-top: 2px solid #5a2a5a;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.social-links a {
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    color: #ff00ff !important;
+}
+
+/* ============================================ */
+/* 8. RESPONSIVE DESIGN                         */
+/* ============================================ */
+@media (max-width: 768px) {
+    body {
+        padding-top: 110px;
+    }
+    
+    .carousel-item h1 {
+        font-size: 1.8rem;
+    }
+    
+    #reloj {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+}

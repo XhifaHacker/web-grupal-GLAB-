@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>呪術高専 Sorce Shop</title>
+    <meta name="description" content="Descripción de mi sitio">
+    <meta name="author" content="Dan Bustinza Penadillo">
+    <meta name="keywords" content="diseño web, portafolio, programador frontend, html, bootstrap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> <!--librería AOS (llamado por el js)-->
+    <link rel="stylesheet" href="tienda.css">
+</head>
+
+<body>
+    
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow"> 
+        <div class="container d-flex align-items-center flex-wrap">  
+            <a class="navbar-brand fw-bold text-nowrap order-1 order-lg-0" href="#">
+                <i class="fas fa-dragon"></i> 呪術高専
+            </a>
+
+            <button class="navbar-toggler order-2 order-lg-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJJK" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <form class="d-flex mx-auto my-2 my-lg-0 flex-shrink-1 px-3 order-3 order-lg-1 w-100 w-lg-auto" role="search" style="max-width: 320px;">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-dark border-secondary text-muted border-end-0 rounded-start-pill ps-3">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="search" class="form-control bg-dark text-light border-secondary border-start-0 rounded-end-pill py-1" placeholder="Buscar..." aria-label="Buscar">
+                </div>
+            </form>
+
+            <div class="collapse navbar-collapse order-4 order-lg-2" id="navbarJJK">             
+                <ul class="navbar-nav flex-lg-row flex-shrink-0 me-3 mb-0 align-items-lg-center">
+                    <li class="nav-item dropdown text-nowrap">
+                        <a class="nav-link dropdown-toggle d-inline-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            🛍️&nbsp;Catálogo
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#armas">⚔️ Armas Malditas</a></li>
+                            <li><a class="dropdown-item" href="#uniformes">🥋 Uniformes</a></li>
+                            <li><a class="dropdown-item" href="#accesorios">👓 Accesorios</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#merch">🧸 Merchandising</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item text-nowrap">
+                        <a class="nav-link" href="#projects">
+                            🔥&nbsp;Ofertas
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown text-nowrap"> 
+                        <a class="nav-link dropdown-toggle d-inline-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            👤&nbsp;Mi cuenta
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="index_gojo.html">
+                                    🏠 Inicio
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#Pagar">
+                                    💳 Pagar
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    📤️ Iniciar sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <button id="darkModeToggle" class="btn-mode mt-2 mt-lg-0 flex-shrink-0 text-nowrap">
+                    🌙 Modo Oscuro
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- CARRUSEL -->
+    <div id="miCarruselDestacado" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#miCarruselDestacado" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width: 12px; height: 12px; border-radius: 50%;"></button>
+            <button type="button" data-bs-target="#miCarruselDestacado" data-bs-slide-to="1" aria-label="Slide 2" style="width: 12px; height: 12px; border-radius: 50%;"></button>
+            <button type="button" data-bs-target="#miCarruselDestacado" data-bs-slide-to="2" aria-label="Slide 3" style="width: 12px; height: 12px; border-radius: 50%;"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active carousel-slide-1 vh-100">
+                <div class="d-flex h-100 align-items-center justify-content-center text-white">
+                    <div class="text-center">
+                        <span class="rango-badge mb-3 d-inline-block">Grado Especial</span>
+                        <h2>Bienvenido</h2>
+                        <p>Descubre nuestros servicios</p>
+                        <a href="#" class="btn btn-primary">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-slide-2 vh-100">
+                <div class="d-flex h-100 align-items-center justify-content-center text-white">
+                    <div class="text-center">
+                        <span class="rango-badge mb-3 d-inline-block">Nueva colección</span>
+                        <h2>Armas Malditas</h2>
+                        <p>Explora las herramientas de grado especial</p>
+                        <a href="#" class="btn btn-danger">Ver Catálogo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-slide-3 vh-100">
+                <div class="d-flex h-100 align-items-center justify-content-center text-white">
+                    <div class="text-center">
+                        <span class="rango-badge mb-3 d-inline-block">Envío gratis</span>
+                        <h2>Uniformes Oficiales</h2>
+                        <p>Indumentaria de alta protección con envíos gratis</p>
+                        <a href="#" class="btn btn-warning">Ver Ofertas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#miCarruselDestacado" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#miCarruselDestacado" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+    <!-- CATÁLOGO -->
+    <div class="container my-5" id="catalogo">
+        <h2 class="text-center mb-4 fw-bold text-white">Nuestro Catálogo</h2>
+
+        <div class="row g-4">
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-info position-absolute top-0 start-0 m-3 z-3">Nuevo</span>
+                    <div class="ratio ratio-16x9">
+                        <img src="Yuta Okkotsu’s Ring Icon.jpg" class="card-img-top object-fit-cover" alt="Producto 1" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">💍 Engagement Ring</h5>
+                        <p class="card-text text-muted flex-grow-1">Conductor espectral de Grado Especial. Usado por sindicatos asiáticos para el contrabando masivo de energía y la clonación ilegal de técnicas malditas. Alto riesgo de posesión si el operador es mentalmente inestable.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal1">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-danger position-absolute top-0 start-0 m-3 z-3">¡Oferta!</span>
+                    <div class="ratio ratio-16x9">
+                        <img src="gokumonkyo.png" class="card-img-top object-fit-cover" alt="Producto 2" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">📦 Prison Realm</h5>
+                        <p class="card-text text-muted flex-grow-1">Herramienta utilizada por las mafias de la Europa del Este para neutralizar objetivos gubernamentales de Grado Especial sin dejar rastro de su paradero.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal2">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-info position-absolute top-0 start-0 m-3 z-3">Nuevo</span>
+                    <div class="ratio ratio-16x9">
+                        <img src="Blunt Cleaver Icon.jpg" class="card-img-top object-fit-cover" alt="Producto 3" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">⚔️ Blunt Cleaver</h5>
+                        <p class="card-text text-muted flex-grow-1">Arma de impacto geométrico para combate urbano. Fuerza un punto de quiebre de 7:3 en el objetivo. Replicada por redes de sicarios para reventar blindajes malditos y defensas reforzadas mediante fuerza bruta.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal3">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-secondary position-absolute top-0 start-0 m-3 z-3"></span>
+                    <div class="ratio ratio-16x9">
+                        <img src="Soul Split Katana Icon.jpg" class="card-img-top object-fit-cover" alt="Producto 4" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">🗡️ Split Soul Katana</h5>
+                        <p class="card-text text-muted flex-grow-1">Armamento de perforación biológica. Ignora escudos físicos y regeneración celular para rebanar directamente la esencia espiritual. Arma predilecta de las tríadas de Hong Kong; las heridas causadas son incurables.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal4">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-danger position-absolute top-0 start-0 m-3 z-3">Destacado</span>
+                    <div class="ratio ratio-16x9">
+                        <img src="lanza invertida del cielo.jpg" class="card-img-top object-fit-cover" alt="Producto 5" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">🔱 Inverted Spear of Heaven</h5>
+                        <p class="card-text text-muted flex-grow-1">Daga táctica de contrainsurgencia militar. Emite una frecuencia disruptiva que colapsa y apaga cualquier técnica maldita activa al contacto. Contrabandeada por paramilitares para ejecutar hechiceros de élite.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal5">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm bg-dark text-white border-secondary position-relative">
+                    <span class="badge bg-info position-absolute top-0 start-0 m-3 z-3">Nuevo</span>
+                    <div class="ratio ratio-16x9">
+                        <img src="Playful Cloud Icon.jpg" class="card-img-top object-fit-cover" alt="Producto 6" />
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title fw-bold">🥖 Playful Cloud</h5>
+                        <p class="card-text text-muted flex-grow-1">Bastón de tres secciones de aleación pesada. Sin energía interna; su letalidad multiplica la fuerza cinética pura del operador. Herramienta de la Yakuza para ejecuciones masivas y demolición de infraestructura.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                            <button class="btn btn-primary btn-sm add-to-cart" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                Agregar
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#detallesModal6">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<!-- MODALES DE DETALLES (MERCADO INTERNACIONAL) -->
+    
+    <!-- Modal 1: Engagement Ring -->
+    <div class="modal fade" id="detallesModal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #001</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="Yuta Okkotsu’s Ring Icon.jpg" class="object-fit-cover" alt="Engagement Ring Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-danger mb-2">Clasificación: Grado Especial</span>
+                            <h4 class="fw-bold text-white mb-2">Engagement Ring (Yuta's Ring)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: 45,000,000 ¥ <span class="text-muted small">(Solo efectivo)</span></h5>
+                            <p class="text-light">Conductor espectral de Grado Especial. Usado por sindicatos asiáticos para el contrabando masivo de energía y la clonación ilegal de técnicas malditas. Alto riesgo de posesión si el operador es mentalmente inestable.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Prison Realm -->
+    <div class="modal fade" id="detallesModal2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #002</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="gokumonkyo.png" class="object-fit-cover" alt="Prison Realm Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-warning text-dark mb-2 fw-bold">Clasificación: Confinamiento</span>
+                            <h4 class="fw-bold text-white mb-2">Prison Realm (Gokumonkyo)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: Cotización Reservada</h5>
+                            <p class="text-light">Celda de aislamiento dimensional. Utilizada por mafias de Europa del Este para neutralizar objetivos de alto rango sin dejar rastro. El tiempo no transcurre en su interior y la fuga es matemáticamente imposible.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Blunt Cleaver -->
+    <div class="modal fade" id="detallesModal3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #003</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="Blunt Cleaver Icon.jpg" class="object-fit-cover" alt="Blunt Cleaver Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-secondary mb-2">Clasificación: Grado 1</span>
+                            <h4 class="fw-bold text-white mb-2">Blunt Cleaver (Nanami's Cleaver)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: 8,500,000 ¥</h5>
+                            <p class="text-light">Arma de impacto geométrico para combate urbano. Fuerza un punto de quiebre de 7:3 en el objetivo. Replicada por redes de sicarios para reventar blindajes malditos y defensas reforzadas mediante fuerza bruta.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Soul Splitter -->
+    <div class="modal fade" id="detallesModal4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #004</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="Soul Split Katana Icon.jpg" class="object-fit-cover" alt="Soul Split Katana Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-danger mb-2">Clasificación: Grado Especial</span>
+                            <h4 class="fw-bold text-white mb-2">Split Soul Katana (Soul Splitter)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: 38,000,000 ¥</h5>
+                            <p class="text-light">Armamento de perforación biológica. Ignora escudos físicos y regeneración celular para rebanar directamente la esencia espiritual. Arma predilecta de las tríadas de Hong Kong; las heridas causadas son incurables.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Inverted Dagger -->
+    <div class="modal fade" id="detallesModal5" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #005</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="lanza invertida del cielo.jpg" class="object-fit-cover" alt="Inverted Spear Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-danger mb-2">Clasificación: Grado Especial</span>
+                            <h4 class="fw-bold text-white mb-2">Inverted Spear of Heaven (Inverted Dagger)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: 50,000,000 ¥ <span class="text-warning small">(Alta Demanda)</span></h5>
+                            <p class="text-light">Daga táctica de contrainsurgencia militar. Emite una frecuencia disruptiva que colapsa y apaga cualquier técnica maldita activa al contacto. Contrabandeada por paramilitares para ejecutar hechiceros de élite.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Playful Cloud -->
+    <div class="modal fade" id="detallesModal6" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold text-uppercase"><i class="bi bi-shield-slash text-danger"></i> Archivo Técnico #006</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="ratio ratio-16x9 border border-secondary rounded overflow-hidden shadow">
+                                <img src="Playful Cloud Icon.jpg" class="object-fit-cover" alt="Playful Cloud Ampliado" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="badge bg-danger mb-2">Clasificación: Grado Especial</span>
+                            <h4 class="fw-bold text-white mb-2">Playful Cloud (Tri-Section Staff)</h4>
+                            <h5 class="text-info fw-bold mb-3">VALORACIÓN: 29,500,000 ¥</h5>
+                            <p class="text-light">Bastón de tres secciones de aleación pesada. Sin energía interna; su letalidad multiplica la fuerza cinética pura del operador. Herramienta de la Yakuza para executions masivas y demolición de infraestructura.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar Canal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-dark text-white pt-5 pb-3 mt-5 border-top border-secondary">
+        <div class="container">
+            <div class="row gy-4">
+                
+                <!-- Sección 1: Identidad de la Tienda -->
+                <div class="col-md-3" data-aos="fade-up">
+                    <h4 class="fw-bold"><i class="fas fa-dragon"></i> 呪術高専</h4>
+                    <p class="text-muted small">
+                        La tienda oficial de la Academia de Hechicería de Tokyo. Herramientas malditas, uniformes de alta protección y artefactos de grado especial.
+                    </p>
+                </div>
+
+                <!-- Sección 2: Enlaces Rápidos -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <h5 class="fw-bold text-info">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#miCarruselDestacado" class="text-white-50 text-decoration-none-hover">Inicio</a></li>
+                        <li class="mb-2"><a href="#catalogo" class="text-white-50 text-decoration-none-hover">🛍️ Catálogo</a></li>
+                        <li class="mb-2"><a href="#projects" class="text-white-50 text-decoration-none-hover">🔥 Ofertas</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white-50 text-decoration-none-hover">📞 Soporte</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sección 3: Datos de Contacto -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="fw-bold text-info">Soporte Técnico</h5>
+                    <p class="text-muted mb-2"><i class="bi bi-telephone text-primary"></i> +51 999 999 999</p>
+                    <p class="text-muted"><i class="bi bi-envelope text-primary"></i> soporte@jujutsu.edu.pe</p>
+                </div>
+
+                <!-- Sección 4: Redes Sociales -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <h5 class="fw-bold text-info">Redes Sociales</h5>
+                    <div class="d-flex gap-3 pt-1">
+                        <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Línea divisoria -->
+            <hr class="border-secondary my-4">
+
+            <!-- Copyright -->
+            <div class="text-center text-muted small">
+                <p class="mb-0">&copy; <span id="year"></span>Academia de Hechicería de Tokyo - 呪術高専 | Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script para interceptar el envío y activar la clase 'was-validated' de Bootstrap
+        (() => {
+            'use strict'
+            const form = document.getElementById('formRegistroContacto')
+
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })()
+    </script>
+    <script>
+        // Actualizar el año de manera automática
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
