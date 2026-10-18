@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave - Tu música, tu mundo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-dark: #1e1e22;
+            --bg-card: #2a2a30;
+            --bg-deep: #16161a;
+            --orange: #f07830;
+            --orange-soft: #f59454;
+            --orange-glow: rgba(240, 120, 48, 0.18);
+            --text-main: #f0ede8;
+            --text-soft: #a09c96;
+            --text-muted: #6a6662;
+            --border: rgba(255, 255, 255, 0.07);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--bg-deep);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--orange);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .logo-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .logo-name span {
+            color: var(--orange);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-soft);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.45rem 0.9rem;
+            border-radius: var(--radius-sm);
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        nav a.active {
+            color: var(--orange);
+        }
+
+        .header-cta {
+            background: var(--orange);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.5rem 1.1rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .header-cta:hover {
+            background: var(--orange-soft);
+            transform: translateY(-1px);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--bg-deep);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(240, 120, 48, 0.12);
+            border: 1px solid rgba(240, 120, 48, 0.3);
+            color: var(--orange-soft);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.85rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+            max-width: 780px;
+            margin: 0 auto 1.25rem;
+        }
+
+        .hero h1 em {
+            color: var(--orange);
+            font-style: normal;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-soft);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-soft);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-soft);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-main);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        /* ── PLAYER ── */
+        .player-section {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Player card */
+        .player-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .album-art {
+            width: 200px;
+            height: 200px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #2e2030 0%, #1a1a24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .album-art::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(240, 120, 48, 0.25), transparent 60%);
+        }
+
+        .album-art svg {
+            width: 56px;
+            height: 56px;
+            fill: rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-info {
+            min-width: 0;
+        }
+
+        .now-playing-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.35rem;
+        }
+
+        .track-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .track-artist {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.25rem;
+        }
+
+        .time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 36px;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 38%;
+            height: 100%;
+            background: var(--orange);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--orange);
+            border-radius: 50%;
+            border: 2px solid var(--bg-card);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: var(--text-soft);
+            cursor: pointer;
+            padding: 0.45rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .ctrl-btn:hover {
+            color: var(--text-main);
+        }
+
+        .ctrl-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .play-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--orange);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .play-btn:hover {
+            background: var(--orange-soft);
+            transform: scale(1.05);
+        }
+
+        .play-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #fff;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        main {
+            flex: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            width: 100%;
+        }
+
+        /* ── SECTIONS ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Playlist */
+        .playlist {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .playlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .track-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.65rem 0.75rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .track-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .track-item.active {
+            background: rgba(240, 120, 48, 0.1);
+        }
+
+        .track-num {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-width: 18px;
+            text-align: right;
+        }
+
+        .track-item.active .track-num {
+            color: var(--orange);
+        }
+
+        .track-thumb {
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
+            background: var(--bg-deep);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .track-thumb svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-muted);
+        }
+        .track-item.active .track-thumb {
+            background: rgba(240, 120, 48, 0.15);
+        }
+        .track-item.active .track-thumb svg {
+            fill: var(--orange);
+        }
+
+        .track-meta {
+            flex: 1;
+            min-width: 0;
+        }
+        .track-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .track-artist-sm {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+        }
+        .track-item.active .track-name {
+            color: var(--orange);
+        }
+        .track-duration {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Stats */
+        .stats-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-deep);
+            border-radius: var(--radius-md);
+            padding: 1.1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: rgba(240, 120, 48, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--orange);
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            margin-top: 2px;
+        }
+
+        /* ── FORMULARIO ADD EVENTO ── */
+        .form-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-soft);
+        }
+
+        input[type=text],
+        input[type=date],
+        input[type=time],
+        select,
+        textarea {
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.875rem;
+            padding: 0.6rem 0.85rem;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(240, 120, 48, 0.15);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        select option {
+            background: var(--bg-card);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        /* ── EVENTOS LISTA ── */
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .evento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .evento-card:hover {
+            border-color: rgba(240, 120, 48, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .evento-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 100px;
+            margin-bottom: 0.85rem;
+        }
+
+        .tag-concierto {
+            background: rgba(240, 120, 48, 0.15);
+            color: var(--orange-soft);
+        }
+        .tag-festival {
+            background: rgba(104, 180, 80, 0.15);
+            color: #8ec87a;
+        }
+        .tag-club {
+            background: rgba(130, 90, 210, 0.15);
+            color: #b09de0;
+        }
+
+        .evento-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+        .evento-meta {
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            display: flex;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+        .evento-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .evento-meta svg {
+            width: 13px;
+            height: 13px;
+            fill: var(--orange);
+        }
+
+        .evento-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .btn-sm {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+
+        .btn-sm:hover {
+            opacity: 0.85;
+        }
+        .btn-detail {
+            background: rgba(240, 120, 48, 0.12);
+            color: var(--orange-soft);
+        }
+        .btn-delete {
+            background: rgba(220, 60, 60, 0.12);
+            color: #e08080;
+            margin-left: auto;
+        }
+
+        /* ── ESTADÍSTICAS ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+        }
+
+        .stat-box .val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--orange);
+        }
+        .stat-box .lbl {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            margin-top: 2px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--bg-deep);
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .footer-copy span {
+            color: var(--orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .social-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-soft);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            color: var(--orange);
+            border-color: rgba(240, 120, 48, 0.4);
+        }
+        .social-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(240, 120, 48, 0.4);
+            border-left: 3px solid var(--orange);
+            color: var(--text-main);
+            font-size: 0.875rem;
+            padding: 0.75rem 1.1rem;
+            border-radius: var(--radius-sm);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.25s, transform 0.25s;
+            pointer-events: none;
+            z-index: 999;
+            max-width: 280px;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .player-card {
+                grid-template-columns: 1fr;
+            }
+            .album-art {
+                width: 100%;
+                height: 200px;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full {
+                grid-column: 1;
+            }
+            nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding: 3rem 1.25rem 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ HEADER ══ -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg>
+                </div>
+                <span class="logo-name">Sound<span>Wave</span></span>
+            </a>
+            <nav>
+                <a href="#inicio" class="active">Inicio</a>
+                <a href="#eventos">Eventos</a>
+                <a href="#estadisticas">Estadísticas</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <a href="#eventos" class="header-cta">+ Nuevo evento</a>
+        </div>
+    </header>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero" id="inicio">
+        <p class="hero-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="12" />
+            </svg>
+            En vivo ahora
+        </p>
+        <h1>Tu plataforma de <em>gestión de eventos</em> musicales</h1>
+        <p>Agrega, filtra y administra conciertos, festivales y noches de club desde un solo lugar. La música te espera.</p>
+        <div class="hero-actions">
+            <a href="#formulario-eventos" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+                Agregar evento
+            </a>
+            <a href="#lista-eventos" class="btn-ghost">Ver todos los eventos</a>
+        </div>
+    </section>
+
+    <!-- ══ PLAYER ══ -->
+    <div class="player-section">
+        <p class="section-label">Reproduciendo ahora</p>
+        <div class="player-card">
+            <div class="album-art">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+            </div>
+            <div class="player-info">
+                <p class="now-playing-label">Reproduciendo ahora</p>
+                <h2 class="track-title">Blinding Lights</h2>
+                <p class="track-artist">The Weeknd · After Hours</p>
+                <div class="progress-bar-wrap">
+                    <span class="time">1:27</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="time">3:50</span>
+                </div>
+                <div class="controls">
+                    <button class="ctrl-btn" title="Aleatorio">
+                        <svg viewBox="0 0 24 24">
+                            <path d="m18 5-3 3M18 5l-3-3M18 5H6a3 3 0 0 0-3 3v1m3 10h12a3 3 0 0 0 3-3v-1M6 19l3-3m-3 3 3 3" />
+                        </svg>
+                    </button>
+                    <button class="ctrl-btn" title="Anterior">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 20 9 12l10-8v16zM5 4v16" />
+                        </svg>
+                    </button>
+                    <button class="play-btn" id="playBtn" title="Reproducir / Pausar">
+                        <svg id="playIcon" viewBox="0 0 24 24">
+                            <path d="M6 3l15 9-15 9V3z" />
+                        </svg>
+                    </button>
+                    <button class="ctrl-btn" title="Siguiente">
+                        <svg viewBox="0 0 24 24">
+                            <path d="m5 20 10-8L5 4v16zm14-16v16" />
+                        </svg>
+                    </button>
+                    <button class="ctrl-btn" title="Repetir">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MAIN ══ -->
+    <main>
+
+        <!-- Playlist + Stats -->
+        <div class="two-col">
+            <!-- Lista de reproducción -->
+            <div class="playlist" id="lista-reproduccion">
+                <div class="playlist-header">
+                    <div>
+                        <p class="section-label">Lista de reproducción</p>
+                        <h3 class="section-title" style="margin-bottom:0; font-size:1.15rem;">Top música 2024</h3>
+                    </div>
+                    <button class="btn-primary" style="font-size:0.78rem; padding:0.35rem 0.9rem;" onclick="shufflePlaylist()">Mezclar</button>
+                </div>
+                <div class="track-list" id="trackList"></div>
+            </div>
+
+            <!-- Stats del player -->
+            <div class="stats-panel">
+                <p class="section-label">Tu actividad musical</p>
+                <h3 class="section-title" style="margin-bottom:0.5rem; font-size:1.15rem;">Resumen</h3>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="tracksPlayed">0</div>
+                        <div class="stat-label">Canciones reproducidas</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value">4h 32m</div>
+                        <div class="stat-label">Tiempo de escucha hoy</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value">47</div>
+                        <div class="stat-label">Artistas únicos</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value">128</div>
+                        <div class="stat-label">Canciones en favoritos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ FORMULARIO EVENTOS ══ -->
+        <section id="formulario-eventos" style="margin-bottom:3rem;">
+            <p class="section-label">Gestión</p>
+            <h2 class="section-title">Agregar nuevo evento</h2>
+            <div class="form-section">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombreEvento">Nombre del evento</label>
+                        <input type="text" id="nombreEvento" placeholder="Ej: Concierto de Coldplay">
+                    </div>
+                    <div class="form-group">
+                        <label for="artista">Artista / Banda</label>
+                        <input type="text" id="artista" placeholder="Ej: Coldplay">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaEvento">Fecha</label>
+                        <input type="date" id="fechaEvento">
+                    </div>
+                    <div class="form-group">
+                        <label for="horaEvento">Hora</label>
+                        <input type="time" id="horaEvento">
+                    </div>
+                    <div class="form-group">
+                        <label for="lugar">Lugar / Venue</label>
+                        <input type="text" id="lugar" placeholder="Ej: Estadio Nacional">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria">
+                            <option value="">Seleccionar...</option>
+                            <option value="concierto">Concierto</option>
+                            <option value="festival">Festival</option>
+                            <option value="club">Club / Noche</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio de entrada (S/)</label>
+                        <input type="text" id="precio" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="capacidad">Capacidad</label>
+                        <input type="text" id="capacidad" placeholder="Ej: 5000">
+                    </div>
+                    <div class="form-group full">
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" placeholder="Describe el evento..."></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-primary" onclick="agregarEvento()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Agregar evento
+                    </button>
+                    <button class="btn-ghost" onclick="limpiarFormulario()">Limpiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ LISTA EVENTOS ══ -->
+        <section id="lista-eventos">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.25rem; flex-wrap:wrap; gap:0.75rem;">
+                <div>
+                    <p class="section-label">Próximos</p>
+                    <h2 class="section-title" style="margin-bottom:0;">Eventos musicales</h2>
+                </div>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <button class="btn-sm btn-detail" onclick="filtrarEventos('todos')" style="font-size:0.8rem; padding:0.45rem 1rem;">Todos</button>
+                    <button class="btn-sm btn-detail" onclick="filtrarEventos('concierto')">Conciertos</button>
+                    <button class="btn-sm btn-detail" onclick="filtrarEventos('festival')">Festivales</button>
+                    <button class="btn-sm btn-detail" onclick="filtrarEventos('club')">Club</button>
+                </div>
+            </div>
+            <div class="eventos-grid" id="eventosGrid"></div>
+        </section>
+
+        <!-- ══ ESTADÍSTICAS ══ -->
+        <section id="estadisticas">
+            <p class="section-label">Resumen</p>
+            <h2 class="section-title">Estadísticas de eventos</h2>
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="val" id="totalEventos">0</div>
+                    <div class="lbl">Total de eventos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val" id="totalConciertos">0</div>
+                    <div class="lbl">Conciertos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val" id="totalFestivales">0</div>
+                    <div class="lbl">Festivales</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val" id="precioPromedio">S/ 0</div>
+                    <div class="lbl">Precio promedio</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ══ FOOTER ══ -->
+    <footer id="contacto">
+        <div class="footer-inner">
+            <div>
+                <div class="logo" style="margin-bottom:0.4rem;">
+                    <div class="logo-icon" style="width:28px;height:28px;">
+                        <svg viewBox="0 0 24 24" style="width:16px;height:16px;" fill="white">
+                            <path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        </svg>
+                    </div>
+                    <span class="logo-name" style="font-size:1rem;">Sound<span>Wave</span></span>
+                </div>
+                <p class="footer-copy">&copy; <span id="yearFooter"></span> SoundWave — Diseño de Interfaces · TECSUP</p>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-btn" title="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" title="Twitter / X">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" title="YouTube">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <script>
+        /* ─── Data ─── */
+        const tracks = [
+            { title: "Blinding Lights", artist: "The Weeknd", duration: "3:50" },
+            { title: "Flowers", artist: "Miley Cyrus", duration: "3:21" },
+            { title: "As It Was", artist: "Harry Styles", duration: "2:37" },
+            { title: "Unholy", artist: "Sam Smith ft. Kim Petras", duration: "2:37" },
+            { title: "Anti-Hero", artist: "Taylor Swift", duration: "3:20" },
+            { title: "Stay", artist: "The Kid LAROI & Justin Bieber", duration: "2:21" },
+            { title: "Heat Waves", artist: "Glass Animals", duration: "3:59" },
+        ];
+
+        let eventos = [
+            { id: 1, nombre: "Mil Horas Tour", artista: "Los Abuelos de la Nada", fecha: "2026-07-25", hora: "20:00",
+                lugar: "Teatro Municipal", categoria: "concierto", precio: 150, capacidad: 1200,
+                descripcion: "La legendaria banda argentina de rock repasa sus clásicos, incluyendo el inolvidable himno 'Mil Horas'." },
+            { id: 2, nombre: "Most Wanted: World Tour", artista: "Bad Bunny", fecha: "2026-08-10", hora: "21:00",
+                lugar: "Estadio San Marcos", categoria: "concierto", precio: 420, capacidad: 30000,
+                descripcion: "El fenómeno del reguetón y trap latino presenta su producción más ambiciosa hasta la fecha." },
+            { id: 3, nombre: "Vive Latino", artista: "Múltiples artistas", fecha: "2026-08-02", hora: "16:00",
+                lugar: "Parque de la Exposición", categoria: "festival", precio: 280, capacidad: 8000,
+                descripcion: "El festival de rock en español más importante de Latinoamérica, con bandas de todo el continente." },
+            { id: 4, nombre: "Rayando el Sol Tour", artista: "Maná", fecha: "2026-09-14", hora: "20:30",
+                lugar: "Estadio Monumental", categoria: "concierto", precio: 320, capacidad: 45000,
+                descripcion: "La banda mexicana de rock pop regresa con sus grandes éxitos de más de tres décadas de carrera." },
+            { id: 5, nombre: "BZRP Sessions Live", artista: "Bizarrap", fecha: "2026-07-22", hora: "22:00",
+                lugar: "Club 90s", categoria: "club", precio: 200, capacidad: 300,
+                descripcion: "El productor argentino más escuchado del momento trae sus sesiones icónicas al formato en vivo." },
+        ];
+
+        let idCounter = 6;
+        let filtroActual = 'todos';
+        let isPlaying = false;
+        let tracksPlayed = 0;
+        let activeTrack = 0;
+
+        /* ─── Playlist ─── */
+        function renderTracks() {
+            const list = document.getElementById('trackList');
+            list.innerHTML = tracks.map((t, i) =>
+                `
+              <div class="track-item${i === activeTrack ? ' active' : ''}" onclick="selectTrack(${i})">
+                <span class="track-num">${i + 1}</span>
+                <div class="track-thumb">
+                  <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+                </div>
+                <div class="track-meta">
+                  <div class="track-name">${t.title}</div>
+                  <div class="track-artist-sm">${t.artist}</div>
+                </div>
+                <span class="track-duration">${t.duration}</span>
+              </div>`
+            ).join('');
+        }
+
+        function selectTrack(i) {
+            activeTrack = i;
+            document.querySelector('.track-title').textContent = tracks[i].title;
+            document.querySelector('.track-artist').textContent = tracks[i].artist;
+            tracksPlayed++;
+            document.getElementById('tracksPlayed').textContent = tracksPlayed;
+            renderTracks();
+            showToast(`▶ ${tracks[i].title}`);
+        }
+
+        function shufflePlaylist() {
+            tracks.sort(() => Math.random() - 0.5);
+            renderTracks();
+            showToast('Lista mezclada 🎲');
+        }
+
+        /* ─── Player ─── */
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pausePath = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+        const playPath = 'M6 3l15 9-15 9V3z';
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playIcon.querySelector('path').setAttribute('d', isPlaying ? pausePath : playPath);
+            if (isPlaying) {
+                tracksPlayed++;
+                document.getElementById('tracksPlayed').textContent = tracksPlayed;
+            }
+        });
+
+        /* Progress animation */
+        let prog = 38;
+        let dir = 1;
+        setInterval(() => {
+            if (!isPlaying) return;
+            prog += dir * 0.05;
+            if (prog >= 100 || prog <= 0) dir *= -1;
+            document.getElementById('progressFill').style.width = prog + '%';
+        }, 100);
+
+        /* ─── Eventos ─── */
+        function renderEventos() {
+            const grid = document.getElementById('eventosGrid');
+            const lista = filtroActual === 'todos' ? eventos : eventos.filter(e => e.categoria === filtroActual);
+            if (lista.length === 0) {
+                grid.innerHTML =
+                    '<p style="color:var(--text-muted); font-size:0.875rem; grid-column:1/-1; padding:1rem 0;">No hay eventos en esta categoría. ¡Agrega el primero!</p>';
+            } else {
+                grid.innerHTML = lista.map(e =>
+                    `
+                <div class="evento-card" id="ev-${e.id}">
+                  <span class="evento-tag tag-${e.categoria}">${e.categoria.charAt(0).toUpperCase() + e.categoria.slice(1)}</span>
+                  <h3 class="evento-title">${e.nombre}</h3>
+                  <p style="font-size:0.82rem; color:var(--text-soft); margin-bottom:0.75rem;">${e.artista}</p>
+                  <div class="evento-meta">
+                    <span>
+                      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      ${formatFecha(e.fecha)}
+                    </span>
+                    <span>
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      ${e.hora}
+                    </span>
+                    <span>
+                      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      ${e.lugar}
+                    </span>
+                  </div>
+                  <div class="evento-actions">
+                    <button class="btn-sm btn-detail" onclick="verDetalle(${e.id})">Ver detalle</button>
+                    <span style="font-size:0.78rem; font-weight:700; color:var(--orange); align-self:center; margin-left:auto; margin-right:0.5rem;">S/ ${e.precio}</span>
+                    <button class="btn-sm btn-delete" onclick="eliminarEvento(${e.id})">Eliminar</button>
+                  </div>
+                </div>`
+                ).join('');
+            }
+            actualizarEstadisticas();
+        }
+
+        function formatFecha(f) {
+            if (!f) return '—';
+            const [y, m, d] = f.split('-');
+            const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            return `${d} ${meses[parseInt(m) - 1]} ${y}`;
+        }
+
+        function filtrarEventos(cat) {
+            filtroActual = cat;
+            renderEventos();
+        }
+
+        function agregarEvento() {
+            const nombre = document.getElementById('nombreEvento').value.trim();
+            const artista = document.getElementById('artista').value.trim();
+            const fecha = document.getElementById('fechaEvento').value;
+            const hora = document.getElementById('horaEvento').value;
+            const lugar = document.getElementById('lugar').value.trim();
+            const categoria = document.getElementById('categoria').value;
+            const precio = parseFloat(document.getElementById('precio').value) || 0;
+            const capacidad = parseInt(document.getElementById('capacidad').value) || 0;
+            const descripcion = document.getElementById('descripcion').value.trim();
+
+            if (!nombre || !categoria) {
+                showToast('Por favor completa nombre y categoría.');
+                return;
+            }
+
+            eventos.push({ id: idCounter++, nombre, artista, fecha, hora, lugar, categoria, precio, capacidad,
+                descripcion });
+            limpiarFormulario();
+            renderEventos();
+            showToast('✅ Evento agregado correctamente');
+        }
+
+        function eliminarEvento(id) {
+            eventos = eventos.filter(e => e.id !== id);
+            renderEventos();
+            showToast('🗑 Evento eliminado');
+        }
+
+        function verDetalle(id) {
+            const e = eventos.find(x => x.id === id);
+            if (!e) return;
+            showToast(`📍 ${e.nombre} — ${e.lugar} — S/ ${e.precio}`);
+        }
+
+        function limpiarFormulario() {
+            ['nombreEvento', 'artista', 'fechaEvento', 'horaEvento', 'lugar', 'precio', 'capacidad', 'descripcion']
+            .forEach(id => document.getElementById(id).value = '');
+            document.getElementById('categoria').value = '';
+        }
+
+        function actualizarEstadisticas() {
+            document.getElementById('totalEventos').textContent = eventos.length;
+            document.getElementById('totalConciertos').textContent = eventos.filter(e => e.categoria === 'concierto')
+                .length;
+            document.getElementById('totalFestivales').textContent = eventos.filter(e => e.categoria === 'festival')
+                .length;
+            const precios = eventos.filter(e => e.precio > 0).map(e => e.precio);
+            const prom = precios.length ? Math.round(precios.reduce((a, b) => a + b, 0) / precios.length) : 0;
+            document.getElementById('precioPromedio').textContent = 'S/ ' + prom;
+        }
+
+        /* ─── Toast ─── */
+        let toastTimer;
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        /* ─── Footer year ─── */
+        document.getElementById('yearFooter').textContent = new Date().getFullYear();
+
+        /* ─── Init ─── */
+        renderTracks();
+        renderEventos();
+    </script>
+</body>
+</html>
